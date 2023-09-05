@@ -1,0 +1,14 @@
+
+.item-list-container {
+    background-color: #2c5871;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .item-list-container h3 {
+    color: #ffffff;
+    font-weight: bold;
+  }
+  
