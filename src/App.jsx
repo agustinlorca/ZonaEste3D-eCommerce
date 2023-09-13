@@ -8,8 +8,8 @@ function App() {
 
   return (
     <div>
-      <Navbar></Navbar>
-      <ItemListContainer greeting="¡Bienvenido a nuestra tienda de Impresión 3D!"></ItemListContainer>
+      <Navbar/>
+      <ItemListContainer greeting="¡Bienvenido a nuestra tienda de Impresión 3D!"/>
     </div>
   )
 }
