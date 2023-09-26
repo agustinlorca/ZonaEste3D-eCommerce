@@ -5,11 +5,12 @@ import logoZE3D from "../../Assets/img/logoZE3D.png";
 import "./navbar.css";
 import CartWidget from "../CartWidget/CartWidget"
 import "../CartWidget/cartWidget.css"
+
 const NavbarComp = () => {
   return (
-    <Navbar expand="lg" className="navbar">
+    <Navbar expand="lg" fixed="top" className="navbar">
       <Container>
-        <Navbar.Brand href="#home" className="fw-bold title-brand">
+        <Navbar.Brand href="/" className="fw-bold title-brand">
           <img
             alt=""
             src={logoZE3D}
@@ -17,18 +18,18 @@ const NavbarComp = () => {
             height="45"
             className="img-navbar"
           />{" "}
-          <a className="title-brand" href="#">
-            Zona Este 3D
-          </a>
+          Zona Este 3D
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link className="nav-link" href="#home">Inicio</Nav.Link>
-            <Nav.Link className="nav-link" href="#link">Productos</Nav.Link>
-            <Nav.Link className="nav-link" href="#link">Catálogo</Nav.Link>
-            <Nav.Link className="nav-link" href="#link">Contacto</Nav.Link>
+            
+            <Nav.Link className="nav-link" href="/">Inicio</Nav.Link>
+            <Nav.Link className="nav-link" href="/category/makers">Makers</Nav.Link>
+            <Nav.Link className="nav-link" href="/category/filamentos">Filamentos</Nav.Link>
+            <Nav.Link className="nav-link" href="/category/impresoras">Impresoras</Nav.Link>
+            <Nav.Link className="nav-link" href="#footer">Contacto</Nav.Link>
             <CartWidget className="nav-cart"></CartWidget>
           </Nav>
         </Navbar.Collapse>

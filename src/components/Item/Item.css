@@ -1,0 +1,18 @@
+.card {
+  height: 100% !important;
+ 
+}
+
+.img-card {
+  height: 200px !important; /* altura de imagen fija para todas las cards */
+  object-fit: contain; /* para asegurarte de que la imagen se ajuste al tamaño que necesitas */
+  margin-bottom: 1rem;
+}
+
+.body-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+

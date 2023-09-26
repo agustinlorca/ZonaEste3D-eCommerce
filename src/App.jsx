@@ -1,17 +1,14 @@
-
-import './App.css'
-
-import Navbar from "./components/Navbar/Navbar"
-import ItemListContainer from './components/ItemListContainer/ItemListContainer'
+import "./App.css";
+import Navigation from "./routes/Navigation";
+import Layout from "./components/Layout/Layout";
 function App() {
-  
-
   return (
     <div>
-      <Navbar/>
-      <ItemListContainer greeting="¡Bienvenido a nuestra tienda de Impresión 3D!"/>
+      <Layout>
+        <Navigation />
+      </Layout>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
