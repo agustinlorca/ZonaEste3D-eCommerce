@@ -10,7 +10,7 @@ const Item = ({ id, nombre, precio, imgUrl }) => {
         <Card.Title>{nombre}</Card.Title>
         <Card.Text>Precio: ${precio}</Card.Text>
         
-        <Link to={`/makers/${id}`} className="btn btn-outline-dark">
+        <Link to={`/item/${id}`} className="btn btn-outline-dark">
           Ver detalle
         </Link>
       </Card.Body>

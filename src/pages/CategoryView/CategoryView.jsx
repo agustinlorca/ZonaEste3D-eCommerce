@@ -1,13 +1,11 @@
 import ItemListContainer from "../../components/ItemListContainer/ItemListContainer";
-import Banner from "../../components/Banner/Banner";
 import Layout from "../../components/Layout/Layout";
-const Home = () => {
+const CategoryView = () => {
   return (
     <Layout>
-      <Banner/>
-      <ItemListContainer greeting={"Listado general de productos"} />
+      <ItemListContainer/>
     </Layout>
 
   );
 };
-export default Home;
+export default CategoryView;

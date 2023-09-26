@@ -4,19 +4,18 @@ import { productos } from "../../products";
 import "./itemListContainer.css";
 import ItemList from "../ItemList/ItemList";
 import SpinnerLoader from "../SpinnerLoader/SpinnerLoader";
+import Layout from "../Layout/Layout";
 
 const ItemListContainer = ({ greeting }) => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { idCategory } = useParams();
-  console.log(idCategory);
 
   const getData = async () => {
     return new Promise((resolve) => {
       setTimeout(() => {
         if (idCategory) {
-          const filteredProducts = productos.filter((prod) => prod.categoria === idCategory);
-          resolve(filteredProducts);
+          resolve(productos.filter((prod) => prod.categoria === idCategory));
         } else {
           resolve(productos);
         }
@@ -25,16 +24,21 @@ const ItemListContainer = ({ greeting }) => {
   };
 
   useEffect(() => {
-    
+    window.scrollTo(0, 0);
+    setIsLoading(true);
     getData().then((res) => {
       setProducts(res);
       setIsLoading(false);
     });
-  }, []);
-
+  }, [idCategory]);
   return (
-    <div className="container my-6" style={{marginTop:"6rem", marginBottom: "5rem"}}>
-      <div className="tracking-in-expand">{greeting && <h2>{greeting}</h2>}</div>
+    <div
+      className="container my-6"
+      style={{ marginTop: "6rem", marginBottom: "5rem" }}
+    >
+      <div className="tracking-in-expand">
+        {greeting && <h2>{greeting}</h2>}
+      </div>
 
       {idCategory !== undefined && (
         <div className="tracking-in-expand">
