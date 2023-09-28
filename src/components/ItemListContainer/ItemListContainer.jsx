@@ -4,7 +4,6 @@ import { productos } from "../../products";
 import "./itemListContainer.css";
 import ItemList from "../ItemList/ItemList";
 import SpinnerLoader from "../SpinnerLoader/SpinnerLoader";
-import Layout from "../Layout/Layout";
 
 const ItemListContainer = ({ greeting }) => {
   const [products, setProducts] = useState([]);
@@ -31,6 +30,7 @@ const ItemListContainer = ({ greeting }) => {
       setIsLoading(false);
     });
   }, [idCategory]);
+  
   return (
     <div
       className="container my-6"

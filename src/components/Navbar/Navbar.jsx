@@ -6,7 +6,7 @@ import "./navbar.css";
 import CartWidget from "../CartWidget/CartWidget";
 import "../CartWidget/cartWidget.css";
 import { Link } from "react-router-dom";
-import { NavLink } from "react-bootstrap";
+
 const NavbarComp = () => {
   return (
     <Navbar expand="lg" fixed="top" className="navbar">

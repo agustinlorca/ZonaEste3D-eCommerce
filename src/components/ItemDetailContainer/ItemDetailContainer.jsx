@@ -9,23 +9,29 @@ const ItemDetailContainer = () => {
   const [product, setProduct] = useState({});
   const { idItem } = useParams();
 
-  const searchProduct = productos.find((prod) => prod.id === parseInt(idItem));
+  const getData = async () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(productos.find((prod) => prod.id === parseInt(idItem)));
+      }, 2000);
+    });
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    setTimeout(() => {
-      setProduct(searchProduct);
+    getData().then((res) => {
+      setProduct(res);
       setIsLoading(false);
-    }, 2000);
+    });
   }, []);
 
   return (
     <div
-        className="container"
-        style={{ marginTop: "6rem", marginBottom: "5rem" }}
-      >
-        {isLoading ? <SpinnerLoader /> : <ItemDetail item={product} />}
-      </div>
+      className="container"
+      style={{ marginTop: "6rem", marginBottom: "5rem" }}
+    >
+      {isLoading ? <SpinnerLoader /> : <ItemDetail item={product} />}
+    </div>
   );
 };
 

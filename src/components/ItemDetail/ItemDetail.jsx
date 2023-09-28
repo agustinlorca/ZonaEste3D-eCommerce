@@ -1,24 +1,6 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const ItemDetail = ({ item }) => {
-
-  const [quantity, setQuantity] = useState(1);
-
-
-  const handleIncrement = () => {
-    setQuantity(quantity + 1);
-  };
-
-  const handleDecrement = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
-  };
-  const handleAddToCart = () => {
-    console.log("Producto añadido")
-  };
-  
   return (
     <div className="container mt-5 px-xl-5">
       <nav aria-label="breadcrumb" className="bg-light rounded mb-4">
@@ -74,18 +56,18 @@ const ItemDetail = ({ item }) => {
             <div className="container mb-4">
               <div className="row mb-4">
                 <div className="col-4">
-                  <button className="btn btn-outline-danger w-100" onClick={handleDecrement}>-</button>
+                  <button className="btn btn-outline-danger w-100">-</button>
                 </div>
                 <div className="col-4">
-                  <button className="btn btn-outline-dark w-100">{quantity}</button>
+                  <button className="btn btn-outline-dark w-100">1</button>
                 </div>
                 <div className="col-4">
-                  <button className="btn btn-outline-primary w-100" onClick={handleIncrement}>+</button>
+                  <button className="btn btn-outline-primary w-100">+</button>
                 </div>
               </div>
               <div className="row">
                 <div className="col">
-                  <button className="btn btn-outline-success w-100" onClick={handleAddToCart}>
+                  <button className="btn btn-outline-success w-100">
                     Añadir al carrito
                   </button>
                 </div>
