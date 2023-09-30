@@ -42,7 +42,9 @@ const NavbarComp = () => {
             <Nav.Link className="nav-link" href="#footer">
               Contacto
             </Nav.Link>
-            <CartWidget className="nav-cart"></CartWidget>
+            <Link to="/cart">
+              <CartWidget className="nav-cart"></CartWidget>
+            </Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

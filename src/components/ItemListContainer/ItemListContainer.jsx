@@ -1,12 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { productos } from "../../products";
 import "./itemListContainer.css";
 import ItemList from "../ItemList/ItemList";
 import SpinnerLoader from "../SpinnerLoader/SpinnerLoader";
+import { CartStateContext } from "../../context/CartContext";
 
 const ItemListContainer = ({ greeting }) => {
-  const [products, setProducts] = useState([]);
+  
+  const {listItems, setListItems } = useContext(CartStateContext)
+
   const [isLoading, setIsLoading] = useState(true);
   const { idCategory } = useParams();
 
@@ -18,7 +21,7 @@ const ItemListContainer = ({ greeting }) => {
         } else {
           resolve(productos);
         }
-      }, 2000);
+      }, 0);
     });
   };
 
@@ -26,15 +29,14 @@ const ItemListContainer = ({ greeting }) => {
     window.scrollTo(0, 0);
     setIsLoading(true);
     getData().then((res) => {
-      setProducts(res);
+      setListItems(res);
       setIsLoading(false);
     });
   }, [idCategory]);
-  
   return (
     <div
       className="container my-6"
-      style={{ marginTop: "6rem", marginBottom: "5rem" }}
+      style={{ marginTop: "2rem", marginBottom: "5rem" }}
     >
       <div className="tracking-in-expand">
         {greeting && <h2>{greeting}</h2>}
@@ -45,7 +47,7 @@ const ItemListContainer = ({ greeting }) => {
           <h2>Categoría {idCategory}</h2>
         </div>
       )}
-      {isLoading ? <SpinnerLoader /> : <ItemList items={products} />}
+      {isLoading ? <SpinnerLoader /> : <ItemList items={listItems} />}
     </div>
   );
 };

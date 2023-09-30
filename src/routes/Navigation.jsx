@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Home, CategoryView, ItemDetailView} from "../pages";
+import { Home, CategoryView, ItemDetailView, CartView} from "../pages";
 
 const Navigation = () => {
   const routes = createBrowserRouter([
@@ -14,6 +14,10 @@ const Navigation = () => {
     {
       path: "/item/:idItem",
       element: <ItemDetailView/>,
+    },
+    {
+      path: "/cart",
+      element: <CartView/>
     },
   ]);
   return <RouterProvider router={routes} />;

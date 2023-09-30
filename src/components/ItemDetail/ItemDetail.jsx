@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import ItemCount from "../ItemCount/ItemCount";
+
 
 const ItemDetail = ({ item }) => {
+
   return (
     <div className="container mt-5 px-xl-5">
       <nav aria-label="breadcrumb" className="bg-light rounded mb-4">
@@ -18,6 +21,7 @@ const ItemDetail = ({ item }) => {
           </li>
         </ol>
       </nav>
+      
       <div className="row mb-4">
         <div className="d-none d-lg-block col-lg-1">
           <div className="image-vertical-scroller">
@@ -53,27 +57,7 @@ const ItemDetail = ({ item }) => {
             <h2 className="mb-1">{item.nombre}</h2>
             <h4 className="text-muted mb-4">$ {item.precio}</h4>
 
-            <div className="container mb-4">
-              <div className="row mb-4">
-                <div className="col-4">
-                  <button className="btn btn-outline-danger w-100">-</button>
-                </div>
-                <div className="col-4">
-                  <button className="btn btn-outline-dark w-100">1</button>
-                </div>
-                <div className="col-4">
-                  <button className="btn btn-outline-primary w-100">+</button>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col">
-                  <button className="btn btn-outline-success w-100">
-                    Añadir al carrito
-                  </button>
-                </div>
-              </div>
-            </div>
-
+            <ItemCount product={item}/>
             <h4 className="mb-0">Detalles</h4>
             <hr />
             <dl className="row">

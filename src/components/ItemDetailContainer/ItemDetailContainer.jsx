@@ -13,7 +13,7 @@ const ItemDetailContainer = () => {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(productos.find((prod) => prod.id === parseInt(idItem)));
-      }, 2000);
+      }, 0);
     });
   };
 
