@@ -54,7 +54,7 @@ const ItemDetail = ({ item }) => {
               
         <div className="col-lg-5">
           <div className="d-flex flex-column h-100">
-            <h2 className="mb-1">{item.nombre}</h2>
+            <h2 className="mb-4">{item.nombre}</h2>
             <h4 className="text-muted mb-4">$ {item.precio}</h4>
 
             <ItemCount product={item}/>
