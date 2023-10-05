@@ -18,7 +18,7 @@ const ItemCount = ({ product }) => {
     const handleInputChange = (e) => {
         const value = parseInt(e.target.value);
 
-        if (!isNaN(value) && value >= 1) {
+        if (!isNaN(value) && value >= 1 && value <= product.stock) {
             setQuantity(value);
         }
     };
@@ -48,6 +48,8 @@ const ItemCount = ({ product }) => {
                     </button>
                 </div>
             </div>
+           
+            
         </div>
     );
 }

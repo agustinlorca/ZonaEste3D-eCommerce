@@ -5,7 +5,7 @@ import Layout from "../../components/Layout/Layout";
 const Home = () => {
   return (
     <Layout>
-      <Banner/>
+      <Banner style={{marginTop:"12rem"}}/>
       <ItemListContainer greeting={"Listado general de productos"} />
     </Layout>
 

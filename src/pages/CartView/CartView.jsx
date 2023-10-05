@@ -11,7 +11,7 @@ const CartView = () => {
   if (!cartList.length) {
     return (
       <Layout>
-        <section className="my-5">
+        <section style={{marginTop:"7rem", marginBottom:"4rem"}}>
           <div className="container">
             <div className="row">
               {/* Cart */}
@@ -64,7 +64,7 @@ const CartView = () => {
 
   return (
     <Layout>
-      <section className="my-5">
+      <section style={{marginTop:"7rem", marginBottom:"4rem"}}>
         <div className="container">
           <div className="row">
             <div className="col-lg-9">

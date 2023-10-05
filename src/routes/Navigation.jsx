@@ -8,11 +8,11 @@ const Navigation = () => {
       element: <Home />,
     },
     {
-      path: "/category/:idCategory",
+      path: "/category/:categoryId",
       element: <CategoryView />,
     },
     {
-      path: "/item/:idItem",
+      path: "/item/:itemId",
       element: <ItemDetailView/>,
     },
     {
