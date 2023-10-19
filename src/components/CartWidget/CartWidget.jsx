@@ -5,14 +5,21 @@ import { CartStateContext } from "../../context/CartContext";
 
 const CartWidget = () => {
 
-  const {calcItemsQty} = useContext(CartStateContext)
+  const {calcTotalQuantity} = useContext(CartStateContext)
   
   return (
     <div className="position-relative mt-1">
       <img src={cartIcon} width="35" height="35" alt="Cart Icon" />
-      <Badge bg="danger" className="position-absolute translate-middle">
-        {calcItemsQty()}
-      </Badge>
+      {
+        calcTotalQuantity() === 0 
+        ? (<></>)
+        :(
+        <Badge bg="danger" className="position-absolute translate-middle">
+          {calcTotalQuantity()}
+        </Badge>
+        )
+      }
+      
     </div>
   );
 };

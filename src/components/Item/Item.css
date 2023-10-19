@@ -1,11 +1,14 @@
 .card {
   height: 100% !important;
- 
+  position: relative; 
+  transition: box-shadow 0.4s ease-in-out;
 }
-
+.card:hover {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
 .img-card {
-  height: 200px !important; /* altura de imagen fija para todas las cards */
-  object-fit: contain; /* para asegurarte de que la imagen se ajuste al tamaño que necesitas */
+  height: 200px !important;
+  object-fit: contain;
   margin-bottom: 1rem;
 }
 
@@ -15,4 +18,21 @@
   justify-content: space-between;
   height: 100%;
 }
+
+.card-name {
+  font-size: 15px !important;
+  font-weight: 300 !important;
+}
+
+.card-price {
+  font-size: 24px !important;
+}
+
+.card-content {
+  flex-grow: 1; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 

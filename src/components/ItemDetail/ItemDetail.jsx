@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 import ItemCount from "../ItemCount/ItemCount";
-
+import "./ItemDetail.css";
 
 const ItemDetail = ({ item }) => {
-
   return (
     <div className="container mt-5 px-xl-5">
       <nav aria-label="breadcrumb" className="bg-light rounded mb-4">
@@ -21,25 +20,8 @@ const ItemDetail = ({ item }) => {
           </li>
         </ol>
       </nav>
-      
+
       <div className="row mb-4">
-        <div className="d-none d-lg-block col-lg-1">
-          <div className="image-vertical-scroller">
-            <div className="d-flex flex-column">
-              {Array.from({ length: 5 }, (_, i) => {
-                let selected = i !== 1 ? "opacity-6" : "";
-                return (
-                  <img
-                    key={i}
-                    className={"rounded mb-2 ratio " + selected}
-                    alt=""
-                    src={item.imgUrl}
-                  />
-                );
-              })}
-            </div>
-          </div>
-        </div>
         <div className="col-lg-6">
           <div className="row">
             <div className="col-12 mb-4">
@@ -51,13 +33,13 @@ const ItemDetail = ({ item }) => {
             </div>
           </div>
         </div>
-              
         <div className="col-lg-5">
           <div className="d-flex flex-column h-100">
-            <h2 className="mb-4">{item.nombre}</h2>
-            <h4 className="text-muted mb-4">$ {item.precio}</h4>
+            <p className="title">{item.nombre}</p>
+            <p className="price">$ {item.precio.toLocaleString("es-ES")}</p>
 
-            <ItemCount product={item}/>
+            <ItemCount product={item} />
+            
             <h4 className="mb-0">Detalles</h4>
             <hr />
             <dl className="row">

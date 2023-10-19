@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <Layout>
       <Banner style={{marginTop:"12rem"}}/>
-      <ItemListContainer greeting={"Listado general de productos"} />
+      <ItemListContainer greeting={"Productos recomendados"} />
     </Layout>
 
   );

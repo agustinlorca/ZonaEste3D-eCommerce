@@ -4,7 +4,6 @@ import Navbar from "react-bootstrap/Navbar";
 import logoZE3D from "../../Assets/img/logoZE3D.png";
 import "./navbar.css";
 import CartWidget from "../CartWidget/CartWidget";
-import "../CartWidget/cartWidget.css";
 import { Link } from "react-router-dom";
 
 const NavbarComp = () => {

@@ -1,13 +1,79 @@
-import { useContext } from "react";
+import { useContext} from "react";
 import { CartStateContext } from "../../context/CartContext";
-import Layout from "./../../components/Layout/Layout";
-import { ShopWindow, Trash3, Plus, Dash, X } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 
-const CartView = () => {
-  const { cartList, deleteCartItem, removeCartList } =
-  useContext(CartStateContext);
+import Layout from "./../../components/Layout/Layout";
+import { ShopWindow, Trash3, X } from "react-bootstrap-icons";
 
+import { addDoc, collection,serverTimestamp} from 'firebase/firestore';
+import { db } from "../../db/db";
+
+import Swal from 'sweetalert2';
+
+const CartView = () => {
+  const { cartList, deleteCartItem, removeCartList,calcTotalQuantity,calcTotalPrice,subTotal } = useContext(CartStateContext);
+ 
+  const sendOrder = async () => {
+    const { value: formValues } = await Swal.fire({
+      title: 'Ingresa tus datos',
+      html:
+        '<input id="nombre" class="swal2-input" placeholder="Nombre y apellido">' +
+        '<input id="telefono" class="swal2-input" placeholder="Teléfono">' +
+        '<input id="email" class="swal2-input" placeholder="Email">' +
+        '<input id="email-2" class="swal2-input" placeholder="Confirmar email">',
+      confirmButtonText: 'Enviar',
+      focusConfirm: false,
+      preConfirm: () => {
+        const nombre = document.getElementById('nombre').value;
+        const telefono = document.getElementById('telefono').value;
+        const email = document.getElementById('email').value;
+        const email2 = document.getElementById('email-2').value;
+        
+        if (!nombre || !telefono || !email || !email2) {
+          Swal.showValidationMessage('Por favor completa todos los campos');
+        }
+
+        if (email !== email2) {
+          Swal.showValidationMessage('Los correos electrónicos no coinciden');
+        }
+        return {
+          nombre,
+          telefono,
+          email,
+        };
+      },
+    });
+
+    if (formValues) {
+      const { nombre, telefono, email } = formValues;
+
+      const order = {
+        buyer: {nombre,telefono, email },
+        items: cartList.map((itemCart) => ({
+          id: itemCart.id,
+          nombre: itemCart.nombre,
+          precio: itemCart.precio,
+          cantidad: itemCart.qty,
+        })),
+        cantidadProductos: calcTotalQuantity(),
+        total: calcTotalPrice(),
+        fecha: serverTimestamp(),
+      };
+      const ordersCollection = collection(db,"orders");
+      const orderDoc = await addDoc(ordersCollection,order);
+      removeCartList();
+      
+     
+      Swal.fire({
+        title: 'Pedido generado exitosamente',
+        footer: `N° de orden: <strong>${orderDoc.id}</strong>`,
+        icon: 'success',
+        confirmButtonText: 'Aceptar'
+      });
+    } 
+  };
+
+  // Si el carrito está vacío
   if (!cartList.length) {
     return (
       <Layout>
@@ -15,7 +81,7 @@ const CartView = () => {
           <div className="container">
             <div className="row">
               {/* Cart */}
-              <div className="col-lg-9">
+              <div className="col-lg-9 mb-3">
                 <div className="card border shadow-0">
                   <div className="m-4">
                     <h4 className="card-title text-primary text-bold">
@@ -39,7 +105,7 @@ const CartView = () => {
                 </div>
               </div>
               {/* Cart */}
-              <div className="col-lg-3">
+              <div className="col-lg-3 mb-3">
                 <div className="card shadow-0 border">
                   <div className="card-body">
                     <div className="text-center">
@@ -49,7 +115,7 @@ const CartView = () => {
                     <div className="text-center">
                       <p className="mb-2">
                         Acá vas a ver el resumen de tu compra una vez que
-                        agregues productos{" "}
+                        agregues productos
                       </p>
                     </div>
                   </div>
@@ -62,15 +128,17 @@ const CartView = () => {
     );
   }
 
+
+  // Si el carrito no está vacío
   return (
     <Layout>
-      <section style={{marginTop:"7rem", marginBottom:"4rem"}}>
+      <section style={{marginTop:"7rem", marginBottom:"7rem"}}>
         <div className="container">
           <div className="row">
-            <div className="col-lg-9">
+            <div className="col-lg-9 mb-3">
               <div className="card border shadow-0">
                 <div className="m-4">
-                  <h4 className="card-title mb-4">Mi carrito de compras</h4>
+                  <h4 className="card-title text-primary text-bold">Mi carrito de compras</h4>
                    {/* Productos */}
                   {cartList.map((cartItem) => (
                     <div className="row gy-3 mb-2 border-top mt-4" key={cartItem.id}>
@@ -84,10 +152,7 @@ const CartView = () => {
                               alt={cartItem.nombre}
                             />
                             <div className="pt-3">
-                              <Link
-                                to={`/item/${cartItem.id}`}
-                                className="mb-3"
-                              >
+                              <Link to={`/item/${cartItem.id}`} className="mb-3">
                                 {cartItem.nombre}
                               </Link>
                               <p className="pt-2">Stock: {cartItem.stock}</p>
@@ -95,38 +160,31 @@ const CartView = () => {
                           </div>
                         </div>
                       </div>
-                       {/* ItemCount */}
-                      <div className="col-lg col-sm-6 pt-4">
-                        <div className="d-flex input-group">
-                          <button className="btn btn-light icon-hover-danger">
-                            <Dash color="royalblue" />
-                          </button>
-                          <button className="btn btn-light icon-hover-danger">
-                            {cartItem.qty}
-                          </button>
-                          <button className="btn btn-light icon-hover-danger">
-                            <Plus color="royalblue" />
-                          </button>
-                        </div>
-                      </div>
-                      
-
+                  
                       <div className="col-lg-2 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
                         <div className="pt-3">
                           <p className="h6">
-                            Subtotal: $ {cartItem.precio * cartItem.qty}{" "}
+                           Cantidad: {cartItem.qty}
+                          </p>
+                          
+                        </div>
+                      </div>
+                      <div className="col-lg-2 col-sm-6 col-8 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
+                        <div className="pt-3">
+                          <p className="h6">
+                            Subtotal: $ {subTotal(cartItem.id).toLocaleString("es-ES")}
                           </p>
                           <small className="text-muted text-nowrap">
-                            {" "}
-                            $ {cartItem.precio} / por unidad{" "}
+                           
+                            $ {cartItem.precio.toLocaleString("es-ES")} / por unidad
                           </small>
                         </div>
                       </div>
 
-                      <div className="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
+                      <div className="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2 text-center">
                         <div className="float-md-end pt-3">
                           <button
-                            className="btn btn-light icon-hover-danger"
+                            className="btn btn-light"
                             onClick={() => deleteCartItem(cartItem.id)}
                           >
                             <X size="20" color="red" /> Eliminar
@@ -142,7 +200,7 @@ const CartView = () => {
 
                 <div className="border-top pt-4 mx-4 mb-4 text-center">
                   <button
-                    className="btn btn-light icon-hover-danger"
+                    className="btn btn-light"
                     onClick={() => removeCartList()}
                   >
                     <Trash3 color="royalblue" /> Limpiar carrito
@@ -152,31 +210,34 @@ const CartView = () => {
             </div>
             
             {/* Resumen */}
-            <div className="col-lg-3">
+            <div className="col-lg-3 mb-3">
               <div className="card shadow-0 border">
                 <div className="card-body">
                   <div className="text-center">
                     <p className="mb-4 fs-5 fw-bold">Resumen de compra</p>
                   </div>
                   <div className="d-flex justify-content-between">
-                    <p className="mb-2">Cantidad productos:</p>
-                    <p className="mb-2">-</p>
+                    <p className="mb-2">Cantidad total:</p>
+                    <p className="mb-2 fw-bold">{calcTotalQuantity()}</p>
                   </div>
-
                   <div className="d-flex justify-content-between">
                     <p className="mb-2">Envío:</p>
-                    <p className="mb-2">$-</p>
+                    <p className="mb-2 fw-bold">-</p>
+                  </div>
+                  <div className="d-flex justify-content-between">
+                    <p className="mb-2">Desc:</p>
+                    <p className="mb-2 fw-bold">-</p>
                   </div>
                   <hr />
                   <div className="d-flex justify-content-between">
                     <p className="mb-2">Total</p>
-                    <p className="mb-2 fw-bold">$-</p>
+                    <p className="mb-2 fw-bold">$ {calcTotalPrice().toLocaleString("es-ES")}</p>
                   </div>
 
                   <div className="mt-3">
-                    <a href="#" className="btn btn-success w-100 shadow-0 mb-2">
-                      Terminar mi compra
-                    </a>
+                    <button className="btn btn-success w-100 border mt-2" onClick={sendOrder}>
+                    Terminar mi compra
+                    </button>
                     <Link to="/" className="btn btn-light w-100 border mt-2">
                       Seguir Comprando
                     </Link>
