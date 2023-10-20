@@ -1,5 +1,6 @@
 import Spinner from "react-bootstrap/Spinner";
 import "./SpinnerLoader.css";
+
 const SpinnerLoader = () => {
   return (
     <div className="spinner-container">

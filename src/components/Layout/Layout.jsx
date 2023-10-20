@@ -1,10 +1,11 @@
-import Footer from "../Footer/Footer";
-import Navbar from "../Navbar/Navbar";
+import NavbarComp from "./Navbar/NavbarComp";
+import Footer from "./Footer/Footer";
+
 
 const Layout = ({ children }) => {
   return (
     <>
-      <Navbar />
+      <NavbarComp/>
       <div style={{marginTop:"4.5rem"}}>{children}</div>
       <Footer/>
     </>

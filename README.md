@@ -16,7 +16,21 @@ En este proyecto, las ramas se organizan de la siguiente manera:
 
 - **Rama Pre-Entrega 2 (`pre-entrega-2`):** Rama para trabajar en la segunda pre-entrega. 
 
-Una vez que cada pre-entrega esté completa y haya pasado la revisión, la fusionamos a la rama `develop`. Una vez que se haya incorporado `pre-entrega-2` a la rama `develop` con las funcionalidades finales, procedemos a fusionar `develop` en la rama `main` para desplegar la versión estable del proyecto.
+- **Rama Pre-Entrega-Final (`pre-entrega-final`):** Rama para trabajar en la etapa final.
+
+## 💻 Tecnologías:
+
+- **React Bootstrap**
+- **React Router Dom**
+- **Sweetalert2**
+- **React Toastify** 
+- **Firebase/Firestore para la base de datos**
+
+
+## 🚀 Despliegue
+
+- El proyecto está **desplegado y accesible** en [https://zonaeste3d.vercel.app](https://zonaeste3d.vercel.app/)
+
 
 ## Inicio local
 
@@ -45,3 +59,12 @@ $ npm run dev
 ```
 
 La aplicación estará disponible en "http://localhost:5173"
+
+
+## 📹 Video
+
+- En el video se muestra la navegabilidad de la página y también el impacto al generar una orden en Firestore.
+
+<a href='https://www.youtube.com/watch?v=nT4lbLU8o8E' target='_blank'>
+    <img width='30%' src='https://img.youtube.com/vi/nT4lbLU8o8E/mqdefault.jpg' alt='preview' />
+</a>

@@ -2,13 +2,14 @@ import ItemListContainer from "../../components/ItemListContainer/ItemListContai
 import Banner from "../../components/Banner/Banner";
 import Layout from "../../components/Layout/Layout";
 
+
 const Home = () => {
   return (
-    <Layout>
+     <Layout>
       <Banner style={{marginTop:"12rem"}}/>
       <ItemListContainer greeting={"Productos recomendados"} />
-    </Layout>
-
+     </Layout>
+      
   );
 };
 export default Home;

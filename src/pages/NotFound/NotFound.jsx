@@ -4,7 +4,7 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import { PatchExclamationFill } from "react-bootstrap-icons";
 import Layout from "../../components/Layout/Layout";
 
-const NotFound = ({ message }) => {
+const NotFound = () => {
   return (
     <Layout>
       <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "80vh" }}>
@@ -19,13 +19,9 @@ const NotFound = ({ message }) => {
                 <Card.Title className="text-center fs-3 mb-4">
                   Página no encontrada
                 </Card.Title>
-                {message ? (
-                  <p className="mb-4">{message}</p>
-                ) : (
-                  <p className="mb-4">
-                    Lo sentimos, la página a la que intentas acceder no existe.
-                  </p>
-                )}
+                <Card.Text className="mb-4">
+                Lo sentimos, la página a la que intentas acceder no existe.
+                </Card.Text>
                 <Link to="/" className="btn btn-outline-dark">Ir al inicio</Link>
               </Card.Body>
             </Card>

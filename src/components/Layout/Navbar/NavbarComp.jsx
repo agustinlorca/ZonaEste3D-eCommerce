@@ -1,9 +1,9 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import logoZE3D from "../../Assets/img/logoZE3D.png";
-import "./navbar.css";
-import CartWidget from "../CartWidget/CartWidget";
+import logoZE3D from "../../../Assets/img/logoZE3D.png";
+import "./Navbar.css";
+import CartWidget from "../../CartWidget/CartWidget";
 import { Link } from "react-router-dom";
 
 const NavbarComp = () => {

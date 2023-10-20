@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams} from "react-router-dom";
+import { useParams, useNavigate} from "react-router-dom";
 
 import { db } from "../../db/db";
 import { collection, getDocs, query, where } from "firebase/firestore";
@@ -9,11 +9,9 @@ import { CartStateContext } from "../../context/CartContext";
 import "./itemListContainer.css";
 import ItemList from "../ItemList/ItemList";
 import SpinnerLoader from "../SpinnerLoader/SpinnerLoader";
-import NotFound from "../../pages/NotFound/NotFound";
-import Layout from "../Layout/Layout";
 
 const ItemListContainer = ({ greeting }) => {
-  const [isError, setIsError] = useState(false);
+  const navigate = useNavigate();
   const { listItems, setListItems } = useContext(CartStateContext);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -32,7 +30,7 @@ const ItemListContainer = ({ greeting }) => {
     setIsLoading(false);
 
     if(productListFormat.length === 0){
-      setIsError(true)
+      navigate('/not-found')
     }
   }
 
@@ -40,32 +38,21 @@ const ItemListContainer = ({ greeting }) => {
     getProducts()
     window.scrollTo(0, 0);
     setIsLoading(true);
-    setIsError(false)
   },[idCategory])
 
   
-  if(isError) {
-    return (
-      <NotFound message="La categoría a la que intentas acceder no existe."/>
-    )
-  }
+
 
   return (
-    <Layout>
-      <div className="container" style={{ marginTop: idCategory ? "6rem" : "2rem", marginBottom: "5rem" }}>
-      
-      <div className="tracking-in-expand">
-        <h2>{greeting}</h2>
-      </div>
+    <div className="container" style={{ marginTop: idCategory ? "6rem" : "2rem", marginBottom: "5rem" }}>
 
-      {idCategory && 
-        <div className="tracking-in-expand">
-          <h2>Categoría {idCategory}</h2>
-        </div>
-      }
+      {greeting && <h2 className="tracking-in-expand">{greeting}</h2>}
+
+      {idCategory && <h2 className="tracking-in-expand">Categoría {idCategory}</h2>}
+
       {isLoading ? <SpinnerLoader /> : <ItemList items={listItems} />}
+      
     </div>
-    </Layout>
   );
 };
 export default ItemListContainer;
