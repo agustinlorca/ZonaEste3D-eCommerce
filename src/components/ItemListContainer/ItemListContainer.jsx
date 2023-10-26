@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate} from "react-router-dom";
 
-import { db } from "../../db/db";
+import { db } from "../../Firebase/credentials";
 import { collection, getDocs, query, where } from "firebase/firestore";
 
 import { CartStateContext } from "../../context/CartContext";
@@ -9,6 +9,7 @@ import { CartStateContext } from "../../context/CartContext";
 import "./itemListContainer.css";
 import ItemList from "../ItemList/ItemList";
 import SpinnerLoader from "../SpinnerLoader/SpinnerLoader";
+
 
 const ItemListContainer = ({ greeting }) => {
   const navigate = useNavigate();

@@ -5,9 +5,11 @@ import { Link } from "react-router-dom";
 import {Trash3, X } from "react-bootstrap-icons";
 
 import { addDoc, collection,serverTimestamp} from 'firebase/firestore';
-import { db } from "../../db/db";
+import { db } from "../../firebase/credentials";
 
 import Swal from 'sweetalert2';
+
+
 
 const Cart = () => {
   const { cartList, deleteCartItem, removeCartList,calcTotalQuantity,calcTotalPrice,subTotal } = useContext(CartStateContext);

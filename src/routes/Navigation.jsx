@@ -1,5 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Home, CategoryView, ItemDetailView, CartView,NotFound} from "../pages";
+import Login from "../components/Auth/Login/Login";
+import Register from "../components/Auth/Register/Register";
 
 const Navigation = () => {
   const routes = createBrowserRouter([
@@ -19,6 +21,16 @@ const Navigation = () => {
       path: "/cart",
       element: <CartView/>
     },
+    {
+      path:"/login",
+      element: <Login/>
+    }
+    ,
+    {
+      path:"/register",
+      element: <Register/>
+    }
+    ,
     {
       path: "/*",
       element: <NotFound/>,

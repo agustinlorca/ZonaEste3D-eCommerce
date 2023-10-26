@@ -3,6 +3,7 @@ import Badge from "react-bootstrap/Badge";
 import { useContext } from "react";
 import { CartStateContext } from "../../context/CartContext";
 
+
 const CartWidget = () => {
 
   const {calcTotalQuantity} = useContext(CartStateContext)

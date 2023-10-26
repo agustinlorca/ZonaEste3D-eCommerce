@@ -23,7 +23,7 @@ const EmptyCart = () => {
                     </p>
                     <Link to="/">
                       <button className="btn btn-primary">
-                        Descrubir productos
+                        Descubrir productos
                       </button>
                     </Link>
                   </div>

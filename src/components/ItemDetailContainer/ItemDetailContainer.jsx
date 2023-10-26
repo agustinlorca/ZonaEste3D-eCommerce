@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate} from "react-router-dom";
 
-import {db} from "../../db/db"
+
 import { doc, getDoc } from "firebase/firestore";
 
 import ItemDetail from "../ItemDetail/ItemDetail";
 import SpinnerLoader from "../SpinnerLoader/SpinnerLoader";
+import { db } from "../../Firebase/credentials";
+
+
 
 
 const ItemDetailContainer = () => {

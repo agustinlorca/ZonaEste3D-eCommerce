@@ -3,7 +3,7 @@
 }
 .img-navbar {
     max-width: 100%;
-    height: auto;
+    
     margin-right: .5rem;
 }
 .title-brand {
@@ -24,7 +24,7 @@
     font-weight: 400 !important;
 }
   
-.nav-link::after {
+/* .nav-link::after {
     content: "";
     position: absolute;
     width: 100%;
@@ -39,7 +39,7 @@
   
 .nav-link:hover::after {
     transform: scaleX(1);
-}
+} */
 .nav-cart{
     max-width: 100%;
     height: auto;
