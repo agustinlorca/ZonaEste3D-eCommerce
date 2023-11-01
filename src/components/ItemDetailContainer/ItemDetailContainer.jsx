@@ -1,15 +1,11 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate} from "react-router-dom";
 
-
 import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../firebase/credentials";
 
 import ItemDetail from "../ItemDetail/ItemDetail";
 import SpinnerLoader from "../SpinnerLoader/SpinnerLoader";
-import { db } from "../../Firebase/credentials";
-
-
-
 
 const ItemDetailContainer = () => {
   const navigate = useNavigate();

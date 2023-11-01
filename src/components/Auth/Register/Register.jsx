@@ -46,8 +46,6 @@ const Register = () => {
     <Layout>
       <div className="main-container-register">
         <div className="form-box-register">
-          
-          
           <form className="form-register" onSubmit={handleSubmit}>
             <span className="title">Crear una cuenta</span>
             {error && <span className="error">{error}</span>}
@@ -59,7 +57,7 @@ const Register = () => {
           </form>
           <div className="form-section-register">
             <p>
-             ¿Ya tenés una cuenta? <Link to="/login">Login</Link>
+             ¿Ya tenés una cuenta? <Link to="/login">Iniciar sesión</Link>
             </p>
           </div>
         </div>

@@ -7,6 +7,7 @@ function App() {
   return (
     <AuthContext>
       <CartContext>
+        
         <Navigation />
         <ToastContainer />
       </CartContext>

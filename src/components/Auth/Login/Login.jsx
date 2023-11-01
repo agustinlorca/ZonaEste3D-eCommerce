@@ -6,6 +6,7 @@ import Layout from "../../Layout/Layout";
 import "./Login.css";
 import { Google } from "react-bootstrap-icons";
 import Swal from 'sweetalert2';
+import {toast} from 'react-toastify';
 
 const Login = () => {
   const {login,loginWithGoogle,resetPassword} = useContext(AuthCtxt);
@@ -28,6 +29,16 @@ const Login = () => {
    
     try {
       await login(email,password);
+      toast.success(`Inicio de sesión exitoso`, {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       navigate("/");
     } catch (err) {
       if (err.code === "auth/invalid-login-credentials") {

@@ -1,6 +1,6 @@
 import { useContext} from "react";
 import { CartStateContext } from "../../context/CartContext";
-import { Link } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 
 import {Trash3, X } from "react-bootstrap-icons";
 
@@ -8,69 +8,92 @@ import { addDoc, collection,serverTimestamp} from 'firebase/firestore';
 import { db } from "../../firebase/credentials";
 
 import Swal from 'sweetalert2';
-
-
+import { AuthCtxt } from './../../context/AuthContext';
 
 const Cart = () => {
-  const { cartList, deleteCartItem, removeCartList,calcTotalQuantity,calcTotalPrice,subTotal } = useContext(CartStateContext);
- 
-  const sendOrder = async () => {
-    const { value: formValues } = await Swal.fire({
-      title: 'Ingresa tus datos',
-      html:
-        '<input id="nombre" class="swal2-input" placeholder="Nombre y apellido">' +
-        '<input id="telefono" class="swal2-input" placeholder="Teléfono">' +
-        '<input id="email" class="swal2-input" placeholder="Email">' +
-        '<input id="email-2" class="swal2-input" placeholder="Confirmar email">',
-      confirmButtonText: 'Enviar',
-      focusConfirm: false,
-      preConfirm: () => {
-        const nombre = document.getElementById('nombre').value;
-        const telefono = document.getElementById('telefono').value;
-        const email = document.getElementById('email').value;
-        const email2 = document.getElementById('email-2').value;
-        
-        if (!nombre || !telefono || !email || !email2) {
-          Swal.showValidationMessage('Por favor completa todos los campos');
-        }
+  const navigate = useNavigate();
+  const { user } = useContext(AuthCtxt);
+  const { cartList, deleteCartItem, removeCartList, calcTotalQuantity, calcTotalPrice, subTotal } = useContext(CartStateContext);
 
-        if (email !== email2) {
-          Swal.showValidationMessage('Los correos electrónicos no coinciden');
-        }
-        return {
-          nombre,
-          telefono,
-          email,
-        };
-      },
-    });
+  const sendOrder = async () => {
+    let formValues;
+    if (user) {
+      const { isConfirmed } = await Swal.fire({
+        title: `¿Comprar como ${user.email}?`,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Sí',
+        cancelButtonText: 'Cancelar',
+      });
+
+      if (isConfirmed) {
+        formValues = { nombre: '', telefono: '', email: user.email };
+      } else {
+        return; 
+      }
+    } else {
+      const { value } = await Swal.fire({
+        title: 'Completa tus datos',
+        html:
+          '<input id="nombre" class="swal2-input" placeholder="Nombre y apellido">' +
+          '<input id="telefono" class="swal2-input" placeholder="Teléfono">' +
+          '<input id="email" class="swal2-input" placeholder="Email">' +
+          '<input id="email-2" class="swal2-input" placeholder="Confirmar email">',
+        confirmButtonText: 'Generar orden',
+        focusConfirm: false,
+        preConfirm: () => {
+          const nombre = document.getElementById('nombre').value;
+          const telefono = document.getElementById('telefono').value;
+          const email = document.getElementById('email').value;
+          const email2 = document.getElementById('email-2').value;
+
+          if (!nombre || !telefono || !email || !email2) {
+            Swal.showValidationMessage('Por favor completa todos los campos');
+          }
+
+          if (email !== email2) {
+            Swal.showValidationMessage('Los correos electrónicos no coinciden');
+          }
+          return {
+            nombre,
+            telefono,
+            email,
+          };
+        },
+      });
+      formValues = value;
+    }
 
     if (formValues) {
       const { nombre, telefono, email } = formValues;
 
       const order = {
-        buyer: {nombre,telefono, email },
+        buyer: { nombre, telefono, email },
+
         items: cartList.map((itemCart) => ({
           id: itemCart.id,
           nombre: itemCart.nombre,
           precio: itemCart.precio,
           cantidad: itemCart.qty,
+          subtotal: subTotal(itemCart.id),
         })),
+        estado: 'pendiente',
         cantidadProductos: calcTotalQuantity(),
         total: calcTotalPrice(),
         fecha: serverTimestamp(),
       };
-      const ordersCollection = collection(db,"orders");
-      const orderDoc = await addDoc(ordersCollection,order);
+      const ordersCollection = collection(db, 'orders');
+      const orderDoc = await addDoc(ordersCollection, order);
       removeCartList();
-      
+
       Swal.fire({
         title: 'Pedido generado exitosamente',
         footer: `N° de orden: <strong>${orderDoc.id}</strong>`,
         icon: 'success',
-        confirmButtonText: 'Aceptar'
+        confirmButtonText: 'Aceptar',
       });
-    } 
+      navigate(`/order/${orderDoc.id}`)
+    }
   };
 
   return (

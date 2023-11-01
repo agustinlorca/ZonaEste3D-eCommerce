@@ -3,7 +3,7 @@ import { ShopWindow } from "react-bootstrap-icons";
 
 const EmptyCart = () => {
   return (
-    <div >
+    <div>
           <div className="container" style={{marginTop:"8rem",marginBottom:"8rem"}}>
             <div className="row">
               <div className="col-lg-9 mb-3">

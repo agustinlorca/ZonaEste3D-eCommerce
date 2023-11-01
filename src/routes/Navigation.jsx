@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Home, CategoryView, ItemDetailView, CartView,NotFound} from "../pages";
+import { Home, CategoryView, ItemDetailView, CartView,OrderSearchView,UserOrderView,OrderDetailView,NotFound} from "../pages";
 import Login from "../components/Auth/Login/Login";
 import Register from "../components/Auth/Register/Register";
 
@@ -31,6 +31,19 @@ const Navigation = () => {
       element: <Register/>
     }
     ,
+    {
+      path: "/search-order",
+      element: <OrderSearchView/>
+    }
+    ,
+    {
+    path: "/my-orders",
+    element: <UserOrderView/>
+    },
+    {
+      path: "/order/:orderID",
+      element: <OrderDetailView/>
+    },
     {
       path: "/*",
       element: <NotFound/>,

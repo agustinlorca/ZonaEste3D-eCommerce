@@ -15,7 +15,7 @@ export const AuthCtxt = createContext()
 
 const AuthContext = ({ children }) => {
   const [user, setUser] = useState(null)
-    
+  const [isAuthReady, setIsAuthReady] = useState(false);
   const register = (email, password) => createUserWithEmailAndPassword(auth,email,password);
   const login = async (email,password) => {
     const userCredential = await signInWithEmailAndPassword(auth, email, password)
@@ -40,11 +40,14 @@ const AuthContext = ({ children }) => {
   const logout = () => signOut(auth);
   
   useEffect(() => {
-    onAuthStateChanged(auth,currentUser => {setUser(currentUser)})
-  },[])
+    onAuthStateChanged(auth, currentUser => {
+      setUser(currentUser);
+      setIsAuthReady(true);
+    });
+  }, []);
 
   return (
-    <AuthCtxt.Provider value={{user,register, login,logout,loginWithGoogle,resetPassword}}>
+    <AuthCtxt.Provider value={{user,isAuthReady,register, login,logout,loginWithGoogle,resetPassword}}>
       {children}
     </AuthCtxt.Provider>
   )
