@@ -72,8 +72,7 @@ const NavbarComp = () => {
               <CartWidget className="nav-cart"></CartWidget>
             </Link>
           </Nav>
-        </Navbar.Collapse>
-        {isAuthReady &&(
+          {isAuthReady &&(
           user 
           ? (
           <Nav className="ml-auto" >
@@ -100,8 +99,7 @@ const NavbarComp = () => {
             
           </div>))
         }
-        
-   
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );

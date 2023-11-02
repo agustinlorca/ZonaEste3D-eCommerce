@@ -29,3 +29,11 @@
       opacity: 1;
     }
 }
+
+.body {
+  margin-top: 4.4rem;
+  min-height: 100vh;
+}
+#footer {
+  margin-top: auto;
+}

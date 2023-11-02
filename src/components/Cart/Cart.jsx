@@ -98,7 +98,7 @@ const Cart = () => {
 
   return (
       <section>
-        <div className="container" style={{marginTop:"8rem",marginBottom:"8rem"}}>
+        <div className="container" style={{marginTop:"8rem",marginBottom:"2rem"}}>
           <div className="row">
             <div className="col-lg-9 mb-3">
               <div className="card border shadow-0">

@@ -6,7 +6,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 
 import { CartStateContext } from "../../context/CartContext";
 
-import './ItemListContainer.css'
+import './itemListContainer.css'
 import ItemList from "../ItemList/ItemList";
 import SpinnerLoader from "../SpinnerLoader/SpinnerLoader";
 import SearchBar from './../SearchBar/SearchBar';
@@ -72,7 +72,7 @@ const ItemListContainer = () => {
 
   
   return (
-    <Container className="container" style={{ marginTop: idCategory ? "6rem" : "2rem", marginBottom: "5rem" }}>
+    <Container className="container" style={{ marginTop: idCategory ? "6rem" : "2rem", marginBottom: "2rem" }}>
        <nav aria-label="breadcrumb" className="bg-nav rounded mb-4">
         <h2 className="text-white fw-bold text-center p-3" aria-current="page">
           NUESTROS PRODUCTOS PARA VOS

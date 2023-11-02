@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Home, CategoryView, ItemDetailView, CartView,OrderSearchView,UserOrderView,OrderDetailView,NotFound} from "../pages";
-import Login from "../components/Auth/Login/Login";
-import Register from "../components/Auth/Register/Register";
+import Login from "../components/Auth/Login";
+import Register from "../components/Auth/Register";
 
 const Navigation = () => {
   const routes = createBrowserRouter([

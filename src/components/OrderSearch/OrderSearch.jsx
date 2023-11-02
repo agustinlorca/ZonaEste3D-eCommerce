@@ -54,7 +54,7 @@ const OrderSearch = () => {
   };
 
   return (
-    <Container style={{ marginTop: '8rem', marginBottom: '10rem' }}>
+    <Container style={{ marginTop: '8rem'}}>
       <SearchBar
       title="Buscar pedidos" 
       handleSearch={handleSearch} 

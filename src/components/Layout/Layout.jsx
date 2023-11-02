@@ -5,7 +5,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <NavbarComp/>
-        <div style={{marginTop:"4.5rem"}}>{children}</div>
+        <div className="body">{children}</div>
       <Footer/>
     </>
   );

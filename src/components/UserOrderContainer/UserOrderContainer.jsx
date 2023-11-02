@@ -33,7 +33,7 @@ const UserOrderContainer = () => {
   },[])
   
   return (
-    <div style={{ marginTop: "8rem", marginBottom: "7rem" }}>
+    <div style={{ marginTop: "8rem", marginBottom: "5rem" }}>
       <h2 className="text-center fw-bold mb-4 tracking-in-expand">Mis pedidos</h2>
       {isLoading ? (
         <SpinnerLoader />
