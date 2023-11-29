@@ -5,7 +5,7 @@ export const CartStateContext = createContext();
 const CartContext = ({ children }) => {
   
     const [listItems, setListItems] = useState([])
-    const [cartList, setCartList] = useState([])
+    const [cartList, setCartList] = useState(JSON.parse(localStorage.getItem('products')) || [])
 
     //Función para añadir un producto al carrito
     const addToCart = (product, quantity) =>{
@@ -17,16 +17,26 @@ const CartContext = ({ children }) => {
         ? { ...cartItem, qty: cartItem.qty + quantity}
         : cartItem);
         setCartList(updatedCartList);
+        localStorage.setItem('products', JSON.stringify(updatedCartList))
       }else {
-        setCartList([...cartList,{...product, qty: (quantity <= product.stock) ? quantity : product.stock}])
+        const addNewProduct = [...cartList,{...product, qty: (quantity <= product.stock) ? quantity : product.stock}];
+        setCartList(addNewProduct)
+        localStorage.setItem('products', JSON.stringify(addNewProduct));
       }
     }
 
     //Función para eliminar un producto del carrito mediante su id
-    const deleteCartItem = (idProduct) => setCartList(cartList.filter(cartItem => cartItem.id !== idProduct))
+    const deleteCartItem = (idProduct) => {
+      const filteredProducts = cartList.filter(cartItem => cartItem.id !== idProduct);
+      setCartList(filteredProducts);
+      localStorage.setItem('products', JSON.stringify(filteredProducts));
+    }
   
     //Función para limpiar todo el carrito
-    const removeCartList = () => setCartList([])
+    const removeCartList = () => {
+      localStorage.setItem('products', JSON.stringify([]));
+      setCartList([]);
+    }
 
     //Funcion para obtener la cantidad actual que hay de un producto en el carrito
     const getCurrentQuantity = (idProduct) => {
