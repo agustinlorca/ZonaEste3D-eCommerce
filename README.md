@@ -1,5 +1,4 @@
 <h1 align="center">🛒 Zona Este 3D - eCommerce</h1>
-<h2 align="center">🚀 Proyecto final de curso React Js - CODERHOUSE</h2>
 
 ## 📝 Descripción
 
